@@ -328,7 +328,7 @@ ConvergenceReport NewtonOptimizer::optimize(WorkingSet &workingSet) {
         else if (prob->hasCollisions()) {
             alpha = std::min(1.0, feasible_alpha);  // no overshoot, or we might miss collisions
         }
-        else if (prob->hasLEQConstraint()) {
+        else {
             // To add multiple nearby bounds to the working set at once, we allow the
             // step to overshoot the bounds (note: variables will be clamped to the bounds anyway before
             // evaluating the objective). Then all bounds violated by the step length obtaining
