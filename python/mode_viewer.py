@@ -72,7 +72,8 @@ class ModeViewer(TriMeshViewer):
 
     def selectMode(self, modeNum, play = True):
         # Avoid flicker/partial redraws during updates
-        self.renderer.pauseRendering()
+        if hasattr(self.renderer, 'pauseRendering'):
+            self.renderer.pauseRendering()
 
         modeVector = None
         if (len(self.modeDoF.shape) == 1):
@@ -161,7 +162,8 @@ class ModeViewer(TriMeshViewer):
         # Start the animation if requested
         if (play): self.action.play()
 
-        self.renderer.resumeRendering()
+        if hasattr(self.renderer, 'resumeRendering'):
+            self.renderer.resumeRendering()
 
     # Override the default wireframe material to apply morphTargets
     def allocateWireframeMaterial(self):
